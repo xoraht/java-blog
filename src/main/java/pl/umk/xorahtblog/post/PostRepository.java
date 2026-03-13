@@ -1,4 +1,6 @@
 package pl.umk.xorahtblog.post;
 
-public class PostRepository {
+import org.springframework.data.jpa.repository.JpaRepository;
+
+public interface PostRepository extends JpaRepository<Post, Long> {
 }

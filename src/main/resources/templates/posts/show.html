@@ -1,10 +1,30 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="pl" xmlns:th="http://www.thymeleaf.org">
 <head>
   <meta charset="UTF-8">
-  <title>$Title$</title>
+  <title th:text="${post.title}">Post</title>
+  <link rel="stylesheet" th:href="@{/css/app.css}">
 </head>
 <body>
-$END$
+<header class="header">
+  <nav class="nav">
+    <a th:href="@{/posts}">Posty</a>
+    <a th:href="@{/posts/new}">Dodaj post</a>
+  </nav>
+  <h1 th:text="${post.title}">Tytuł</h1>
+</header>
+
+<main class="container">
+  <div class="meta" th:text="${#temporals.format(post.createdAt, 'yyyy-MM-dd HH:mm')}">data</div>
+
+  <article style="margin-top: 12px; white-space: pre-wrap;"
+           th:text="${post.content}">
+    Treść
+  </article>
+
+  <form th:action="@{|/posts/${post.id}/delete|}" method="post" style="margin-top: 16px;">
+    <button type="submit" onclick="return confirm('Na pewno usunąć?');">Usuń</button>
+  </form>
+</main>
 </body>
 </html>
